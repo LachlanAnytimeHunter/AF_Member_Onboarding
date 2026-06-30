@@ -1,0 +1,31 @@
+{
+  "name": "Around The Club - Anytime Fitness Newcastle",
+  "short_name": "AF Around Club",
+  "description": "Your 30-day Anytime Fitness Newcastle Region member onboarding journey.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0F0A1F",
+  "theme_color": "#440099",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

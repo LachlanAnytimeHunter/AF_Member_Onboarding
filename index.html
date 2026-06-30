@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#440099">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AF Around Club">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Around The Club — Anytime Fitness Newcastle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --blurple:#6E38D5;
+  --violet:#440099;
+  --turquoise:#00AEC7;
+  --red:#EF3340;
+  --orange:#FF7500;
+  --med-purple:#A42AF9;
+  --bg:#0F0A1F;
+  --card:#1B1233;
+  --card2:#241A42;
+  --border:rgba(255,255,255,.08);
+  --text:#FFFFFF;
+  --text-dim:rgba(255,255,255,.55);
+  --text-faint:rgba(255,255,255,.32);
+  --font:'Montserrat',sans-serif;
+}
+html,body{
+  background:var(--bg);
+  font-family:var(--font);
+  color:var(--text);
+  min-height:100vh;
+  overscroll-behavior-y:none;
+}
+body{
+  padding-bottom:90px;
+}
+button{font-family:var(--font);border:none;background:none;cursor:pointer}
+input{font-family:var(--font)}
+
+/* ════════ TOP HEADER ════════ */
+.top-bar{
+  background:linear-gradient(135deg,var(--violet) 0%,var(--blurple) 100%);
+  padding:calc(env(safe-area-inset-top,0px) + 18px) 20px 22px;
+  position:relative;
+  overflow:hidden;
+}
+.top-bar::after{
+  content:'';
+  position:absolute;top:0;right:-10%;bottom:0;width:60%;
+  background:repeating-linear-gradient(115deg, transparent 0 6px, rgba(0,174,199,.12) 6px 7px);
+}
+.logo-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;margin-bottom:14px}
+.logo-mark{display:flex;align-items:center;gap:8px}
+.logo-text{font-weight:900;font-size:13px;letter-spacing:.14em;text-transform:uppercase;line-height:1.15}
+.logo-text small{display:block;font-weight:600;font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:2px}
+.member-pill{
+  background:rgba(255,255,255,.12);
+  border-radius:100px;
+  padding:6px 12px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.04em;
+  display:flex;align-items:center;gap:6px;
+}
+.member-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--turquoise)}
+
+.hero-title{
+  font-weight:900;
+  font-size:28px;
+  line-height:1.0;
+  text-transform:uppercase;
+  letter-spacing:-.01em;
+  position:relative;z-index:2;
+}
+.hero-title .accent{color:var(--turquoise)}
+.hero-sub{
+  font-size:11px;
+  font-weight:600;
+  color:rgba(255,255,255,.55);
+  margin-top:6px;
+  position:relative;z-index:2;
+}
+
+/* Progress ring + bar */
+.progress-card{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+  border-radius:16px;
+  padding:14px 16px;
+  margin-top:16px;
+  position:relative;z-index:2;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.ring-wrap{position:relative;width:54px;height:54px;flex-shrink:0}
+.ring-wrap svg{transform:rotate(-90deg)}
+.ring-pct{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:13px;
+}
+.progress-info{flex:1}
+.progress-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:3px}
+.progress-count{font-size:15px;font-weight:800}
+.progress-count span{font-weight:600;font-size:11px;color:rgba(255,255,255,.5)}
+
+/* ════════ NAME SETUP CARD ════════ */
+.setup-banner{
+  margin:14px 16px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+}
+.setup-banner-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--turquoise);margin-bottom:8px}
+.name-input-row{display:flex;gap:8px}
+.name-input{
+  flex:1;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px 12px;
+  color:#fff;
+  font-size:13px;
+  font-weight:600;
+}
+.name-input::placeholder{color:var(--text-faint)}
+.save-btn{
+  background:var(--turquoise);
+  color:#fff;
+  font-weight:800;
+  font-size:11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-radius:8px;
+  padding:0 16px;
+}
+
+/* ════════ INSTALL BANNER ════════ */
+.install-banner{
+  margin:14px 16px;
+  background:linear-gradient(135deg,rgba(255,117,0,.12),rgba(110,56,213,.12));
+  border:1px solid rgba(255,117,0,.3);
+  border-radius:14px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.install-icon{font-size:22px;flex-shrink:0}
+.install-text{flex:1}
+.install-head{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.install-sub{font-size:10px;color:var(--text-dim);line-height:1.4}
+.install-btn{
+  background:var(--orange);
+  color:#fff;
+  font-weight:800;
+  font-size:10px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  border-radius:8px;
+  padding:8px 12px;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+
+/* ════════ SECTION LIST ════════ */
+.section-wrap{padding:6px 16px 0}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 4px 8px;
+}
+.section-title{
+  font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-dim);
+}
+.section-meta{font-size:10px;font-weight:700;color:var(--text-faint)}
+
+/* Phase tabs */
+.phase-tabs{
+  display:flex;gap:6px;
+  padding:14px 16px 4px;
+  overflow-x:auto;
+}
+.phase-tab{
+  flex-shrink:0;
+  padding:7px 14px;
+  border-radius:100px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  background:var(--card);
+  color:var(--text-dim);
+  border:1px solid var(--border);
+}
+.phase-tab.active{
+  background:var(--blurple);
+  color:#fff;
+  border-color:var(--blurple);
+}
+
+/* Item card */
+.item-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:10px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  transition:all .2s;
+}
+.item-card.done{
+  background:rgba(0,174,199,.08);
+  border-color:rgba(0,174,199,.3);
+}
+.item-check{
+  width:26px;height:26px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.2);
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;
+  margin-top:1px;
+  transition:all .2s;
+}
+.item-card.done .item-check{
+  background:var(--turquoise);
+  border-color:var(--turquoise);
+  color:#fff;
+}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:13px;font-weight:700;line-height:1.3;margin-bottom:3px}
+.item-card.done .item-title{color:rgba(255,255,255,.6);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.3)}
+.item-desc{font-size:11px;color:var(--text-dim);line-height:1.45}
+.item-tag{
+  display:inline-block;
+  margin-top:6px;
+  font-size:8.5px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:5px;
+}
+.tag-app{background:rgba(0,174,199,.15);color:var(--turquoise)}
+.tag-social{background:rgba(164,42,249,.15);color:var(--med-purple)}
+.tag-staff{background:rgba(255,117,0,.15);color:var(--orange)}
+.tag-call{background:rgba(239,51,64,.15);color:var(--red)}
+.tag-pt{background:rgba(110,56,213,.18);color:#b794f6}
+
+/* Expandable instructions */
+.item-expand{
+  margin-top:9px;
+  background:rgba(0,0,0,.2);
+  border-radius:9px;
+  padding:10px 11px;
+  font-size:10.5px;
+  color:var(--text-dim);
+  line-height:1.6;
+  display:none;
+}
+.item-expand.open{display:block}
+.item-expand strong{color:#fff;font-weight:700}
+.item-expand a{color:var(--turquoise);font-weight:700}
+.expand-toggle{
+  font-size:10px;
+  font-weight:800;
+  color:var(--turquoise);
+  margin-top:6px;
+  display:inline-block;
+  letter-spacing:.03em;
+}
+
+/* Staff fun-fact mini grid */
+.staff-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  margin-top:8px;
+}
+.staff-slot{
+  background:rgba(255,255,255,.05);
+  border-radius:8px;
+  padding:8px;
+}
+.staff-slot-label{font-size:8.5px;font-weight:700;color:var(--text-faint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.staff-slot-input{
+  width:100%;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--border);
+  color:#fff;
+  font-size:10px;
+  font-weight:600;
+  padding-bottom:3px;
+}
+.staff-slot-input::placeholder{color:var(--text-faint)}
+
+/* ════════ REWARD / COMPLETE SCREEN ════════ */
+.reward-section{
+  margin:20px 16px;
+  background:linear-gradient(160deg,var(--blurple),var(--violet));
+  border-radius:18px;
+  padding:22px 18px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.reward-section::before{
+  content:'';
+  position:absolute;top:-30%;left:-10%;width:60%;height:160%;
+  background:repeating-linear-gradient(115deg, transparent 0 8px, rgba(255,255,255,.05) 8px 9px);
+}
+.reward-emoji{font-size:38px;margin-bottom:6px;position:relative;z-index:2}
+.reward-title{font-weight:900;font-size:17px;text-transform:uppercase;margin-bottom:6px;position:relative;z-index:2}
+.reward-body{font-size:11.5px;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:14px;position:relative;z-index:2}
+.reward-btn{
+  background:#fff;
+  color:var(--violet);
+  font-weight:900;
+  font-size:12px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  padding:13px 20px;
+  border-radius:11px;
+  width:100%;
+  position:relative;z-index:2;
+}
+.reward-btn:disabled{
+  background:rgba(255,255,255,.15);
+  color:rgba(255,255,255,.4);
+}
+.reward-progress-text{
+  font-size:10px;font-weight:700;color:rgba(255,255,255,.5);
+  margin-top:10px;position:relative;z-index:2;
+}
+
+/* ════════ STAFF REDEEM MODAL ════════ */
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.75);
+  display:none;
+  align-items:center;justify-content:center;
+  z-index:200;
+  padding:20px;
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:linear-gradient(160deg,var(--blurple),var(--violet));
+  border-radius:20px;
+  padding:30px 24px;
+  text-align:center;
+  max-width:380px;
+  width:100%;
+  position:relative;
+  overflow:hidden;
+}
+.modal-box::after{
+  content:'';
+  position:absolute;top:0;right:-20%;bottom:0;width:70%;
+  background:repeating-linear-gradient(115deg, transparent 0 8px, rgba(0,174,199,.1) 8px 9px);
+}
+.modal-emoji{font-size:50px;margin-bottom:10px;position:relative;z-index:2}
+.modal-title{font-weight:900;font-size:20px;text-transform:uppercase;margin-bottom:8px;position:relative;z-index:2}
+.modal-code{
+  background:rgba(255,255,255,.15);
+  border-radius:12px;
+  padding:14px;
+  font-weight:900;
+  font-size:22px;
+  letter-spacing:.15em;
+  margin:14px 0;
+  position:relative;z-index:2;
+}
+.modal-body{font-size:11.5px;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:16px;position:relative;z-index:2}
+.modal-close{
+  background:#fff;color:var(--violet);
+  font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.04em;
+  padding:11px 24px;border-radius:10px;
+  position:relative;z-index:2;
+}
+
+/* ════════ INSTALL MODAL (Add to home screen) ════════ */
+.install-modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:flex-end;
+  z-index:200;
+}
+.install-modal.open{display:flex}
+.install-sheet{
+  background:var(--card);
+  width:100%;
+  border-radius:20px 20px 0 0;
+  padding:22px 20px calc(env(safe-area-inset-bottom,0px) + 24px);
+  max-height:80vh;
+  overflow-y:auto;
+}
+.sheet-handle{width:36px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin:0 auto 16px}
+.sheet-title{font-weight:900;font-size:16px;text-transform:uppercase;margin-bottom:14px}
+.platform-toggle{display:flex;gap:6px;margin-bottom:16px}
+.platform-btn{
+  flex:1;padding:9px;border-radius:9px;
+  font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  background:rgba(255,255,255,.06);color:var(--text-dim);
+  border:1px solid var(--border);
+}
+.platform-btn.active{background:var(--blurple);color:#fff;border-color:var(--blurple)}
+.steps-list{display:none;flex-direction:column;gap:10px}
+.steps-list.active{display:flex}
+.step-row{display:flex;gap:10px;align-items:flex-start}
+.step-num{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--turquoise);color:#fff;
+  font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.step-text{font-size:12px;color:rgba(255,255,255,.8);line-height:1.5;padding-top:2px}
+.step-text strong{color:#fff}
+.sheet-close-btn{
+  margin-top:18px;width:100%;
+  background:rgba(255,255,255,.08);
+  color:#fff;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+  padding:12px;border-radius:10px;
+}
+
+/* Bottom safe space */
+.bottom-pad{height:20px}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ TOP HEADER ═══════════ -->
+<div class="top-bar">
+  <div class="logo-row">
+    <div class="logo-mark">
+      <svg width="26" height="26" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="31" cy="7" r="5" fill="#fff"/>
+        <path d="M28 13 l-6 7 -7 3 1.5 3 7-2 4-4 3 6-5 7 2.5 1.5 6-8-3-7 4 3 3-3-7-5z" fill="#fff"/>
+      </svg>
+      <div class="logo-text">ANYTIME FITNESS<small>Newcastle Region</small></div>
+    </div>
+    <div class="member-pill"><span class="dot"></span><span id="memberPillName">Set up</span></div>
+  </div>
+  <div class="hero-title">AROUND THE<br>CLUB IN <span class="accent">30 DAYS</span></div>
+  <div class="hero-sub">Your member onboarding journey — tick it off as you go</div>
+
+  <div class="progress-card">
+    <div class="ring-wrap">
+      <svg width="54" height="54">
+        <circle cx="27" cy="27" r="23" stroke="rgba(255,255,255,.15)" stroke-width="5" fill="none"/>
+        <circle id="ringFg" cx="27" cy="27" r="23" stroke="#00AEC7" stroke-width="5" fill="none"
+          stroke-dasharray="144.5" stroke-dashoffset="144.5" stroke-linecap="round"/>
+      </svg>
+      <div class="ring-pct" id="ringPct">0%</div>
+    </div>
+    <div class="progress-info">
+      <div class="progress-label">Your progress</div>
+      <div class="progress-count"><span id="doneCount">0</span><span> / <span id="totalCount">0</span> completed</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ NAME SETUP ═══════════ -->
+<div class="setup-banner" id="setupBanner">
+  <div class="setup-banner-label">👋 Let's get set up — what's your name?</div>
+  <div class="name-input-row">
+    <input type="text" class="name-input" id="nameInput" placeholder="Enter your first name">
+    <button class="save-btn" onclick="saveName()">Save</button>
+  </div>
+</div>
+
+<!-- ═══════════ INSTALL BANNER ═══════════ -->
+<div class="install-banner">
+  <div class="install-icon">📲</div>
+  <div class="install-text">
+    <div class="install-head">Save to your home screen</div>
+    <div class="install-sub">Get this like an app — one tap access anytime.</div>
+  </div>
+  <button class="install-btn" onclick="openInstallModal()">How?</button>
+</div>
+
+<!-- ═══════════ PHASE TABS ═══════════ -->
+<div class="phase-tabs" id="phaseTabs"></div>
+
+<!-- ═══════════ CHECKLIST SECTIONS ═══════════ -->
+<div class="section-wrap" id="checklistWrap"></div>
+
+<!-- ═══════════ REWARD SECTION ═══════════ -->
+<div class="reward-section">
+  <div class="reward-emoji">👕</div>
+  <div class="reward-title">Earn Your Club Tee</div>
+  <div class="reward-body">Complete every item on your 30-day journey, then show this screen to a staff member in the gym to claim your custom Anytime Fitness club t-shirt.</div>
+  <button class="reward-btn" id="rewardBtn" onclick="openRewardModal()" disabled>Complete all items to unlock</button>
+  <div class="reward-progress-text" id="rewardProgressText">0 of 0 items completed</div>
+</div>
+
+<div class="bottom-pad"></div>
+
+<!-- ═══════════ STAFF REDEEM MODAL ═══════════ -->
+<div class="modal-overlay" id="rewardModal">
+  <div class="modal-box">
+    <div class="modal-emoji">🎉</div>
+    <div class="modal-title">Journey Complete!</div>
+    <div class="modal-code" id="redeemCode">AF-XXXX</div>
+    <div class="modal-body">Show this screen to any staff member at your club to redeem your custom club t-shirt. Nice work — that's <strong>Real AF</strong>.</div>
+    <button class="modal-close" onclick="closeRewardModal()">Close</button>
+  </div>
+</div>
+
+<!-- ═══════════ INSTALL INSTRUCTIONS MODAL ═══════════ -->
+<div class="install-modal" id="installModal">
+  <div class="install-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">📲 Save to home screen</div>
+    <div class="platform-toggle">
+      <button class="platform-btn active" id="btnIOS" onclick="showPlatform('ios')">iPhone</button>
+      <button class="platform-btn" id="btnAndroid" onclick="showPlatform('android')">Android</button>
+    </div>
+    <div class="steps-list active" id="stepsIOS">
+      <div class="step-row"><div class="step-num">1</div><div class="step-text">Open this page in <strong>Safari</strong> (not Chrome) on your iPhone.</div></div>
+      <div class="step-row"><div class="step-num">2</div><div class="step-text">Tap the <strong>Share icon</strong> (square with an arrow pointing up) at the bottom of the screen.</div></div>
+      <div class="step-row"><div class="step-num">3</div><div class="step-text">Scroll down and tap <strong>"Add to Home Screen."</strong></div></div>
+      <div class="step-row"><div class="step-num">4</div><div class="step-text">Tap <strong>"Add"</strong> in the top right corner.</div></div>
+      <div class="step-row"><div class="step-num">5</div><div class="step-text">You'll now see the Anytime Fitness icon on your home screen — tap it anytime to open your journey.</div></div>
+    </div>
+    <div class="steps-list" id="stepsAndroid">
+      <div class="step-row"><div class="step-num">1</div><div class="step-text">Open this page in <strong>Chrome</strong> on your Android phone.</div></div>
+      <div class="step-row"><div class="step-num">2</div><div class="step-text">Tap the <strong>three dots ⋮</strong> in the top right corner of the browser.</div></div>
+      <div class="step-row"><div class="step-num">3</div><div class="step-text">Tap <strong>"Add to Home screen"</strong> or <strong>"Install app."</strong></div></div>
+      <div class="step-row"><div class="step-num">4</div><div class="step-text">Tap <strong>"Add"</strong> or <strong>"Install"</strong> to confirm.</div></div>
+      <div class="step-row"><div class="step-num">5</div><div class="step-text">The Anytime Fitness icon will appear on your home screen — tap it anytime to open your journey.</div></div>
+    </div>
+    <button class="sheet-close-btn" onclick="closeInstallModal()">Got it</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA — All checklist items grouped by phase
+// ═══════════════════════════════════════════
+const CHECKLIST = [
+  {
+    phase:1, phaseLabel:"Phase 1 · Days 1–10", section:"Get set up",
+    items:[
+      {id:"app1", title:"Download the 6Strong app", tag:"app", tagLabel:"App",
+        desc:"Your training, nutrition and progress all live here.",
+        expand:`<strong>iPhone:</strong> Open the App Store, search "6Strong", tap Get, then Install.<br><br>
+                <strong>Android:</strong> Open Google Play, search "6Strong", tap Install.<br><br>
+                Once downloaded, open the app and tap <strong>Sign Up</strong>.`},
+      {id:"app2", title:"Connect your 6Strong account to Anytime Fitness Newcastle Region", tag:"app", tagLabel:"App",
+        desc:"Link your club so your trainer can see your progress.",
+        expand:`In the app, go to <strong>Settings → Connect Club</strong> and search for your home club. Ask a staff member if you need your club code.`},
+      {id:"app3", title:"Set up your 6Strong profile + goal", tag:"app", tagLabel:"App",
+        desc:"Tell the app what you're training for so it can personalise your plan.",
+        expand:`Fill in your training goal, experience level and any equipment access. This feeds directly into your PT sessions.`},
+      {id:"evolt1", title:"Complete your Evolt 360 body scan", tag:"pt", tagLabel:"Goal Aligned",
+        desc:"A full body composition scan to set your baseline — aligned to your specific goal.",
+        expand:`Ask any staff member to book you in. Takes under 5 minutes. Bring your results to your first PT session so your program is built around real data.`},
+      {id:"meetcm", title:"Met your Club Manager + one funny fact about them", tag:"staff", tagLabel:"Staff",
+        desc:"Say hello and find out something fun about them.",
+        staffFields:[{key:"cm_name",label:"Club Manager name"},{key:"cm_fact",label:"Funny fact"}]},
+      {id:"meetsm", title:"Met your Sales Manager + one funny fact about them", tag:"staff", tagLabel:"Staff",
+        desc:"Say hello and find out something fun about them too.",
+        staffFields:[{key:"sm_name",label:"Sales Manager name"},{key:"sm_fact",label:"Funny fact"}]},
+    ]
+  },
+  {
+    phase:1, phaseLabel:"Phase 1 · Days 1–10", section:"Your free PT sessions",
+    items:[
+      {id:"pt1", title:"Complete free PT session 1 — Goal setting", tag:"pt", tagLabel:"Free PT",
+        desc:"Program design + movement screen with your coach."},
+      {id:"pt2", title:"Complete free PT session 2 — Program check-in", tag:"pt", tagLabel:"Free PT",
+        desc:"Review your plan and lock in your next phase."},
+    ]
+  },
+  {
+    phase:1, phaseLabel:"Phase 1 · Days 1–10", section:"Calls & check-ins",
+    items:[
+      {id:"call3", title:"Day 3 onboarding call completed", tag:"call", tagLabel:"Call",
+        desc:"A quick call from the team to see how your first few days went."},
+    ]
+  },
+  {
+    phase:2, phaseLabel:"Phase 2 · Days 11–20", section:"Share & connect",
+    items:[
+      {id:"selfie", title:"Take a selfie in the gym + tag us on your story", tag:"social", tagLabel:"Social",
+        desc:"Snap a gym selfie and tag @anytimefitness on your Instagram or Facebook story.",
+        expand:`Tag <strong>@anytimefitness</strong> (your local club handle) — staff will check stories to mark this complete.`},
+      {id:"follow", title:"Follow us on Instagram", tag:"social", tagLabel:"Social",
+        desc:"Stay in the loop with classes, challenges and community wins.",
+        expand:`Search your club's Instagram handle and hit follow — ask staff if you're not sure of the exact handle.`},
+      {id:"refer", title:"Refer a friend", tag:"social", tagLabel:"Social",
+        desc:"Bring someone you know in for a free visit — you both win.",
+        expand:`Ask front desk for a referral pass to give to a friend, or refer them directly through the 6Strong app if available.`},
+      {id:"wingman", title:"Bring a friend for Wingman Wednesday", tag:"social", tagLabel:"Social",
+        desc:"Every Wednesday, bring a training partner in with you for free.",
+        expand:`Just bring them along on a Wednesday and let front desk know it's a Wingman Wednesday visit.`},
+    ]
+  },
+  {
+    phase:2, phaseLabel:"Phase 2 · Days 11–20", section:"Calls & check-ins",
+    items:[
+      {id:"call14", title:"Day 14 onboarding + referral call completed", tag:"call", tagLabel:"Call",
+        desc:"Your two-week check-in — how's it going, and who else should join you?"},
+    ]
+  },
+  {
+    phase:3, phaseLabel:"Phase 3 · Days 21–30", section:"Reviews & feedback",
+    items:[
+      {id:"google", title:"Leave us a Google review", tag:"social", tagLabel:"Review",
+        desc:"Tell other locals about your experience so far.",
+        expand:`Search "Anytime Fitness [your club]" on Google, scroll to reviews and tap "Write a review."`},
+      {id:"medallia", title:"Reply to your Medallia survey", tag:"social", tagLabel:"Review",
+        desc:"If you've received a Medallia survey via SMS or email, give us your honest feedback.",
+        expand:`Check your phone/email for a survey link from Anytime Fitness and complete it — it takes less than 2 minutes and goes straight to your club team.`},
+    ]
+  },
+  {
+    phase:3, phaseLabel:"Phase 3 · Days 21–30", section:"Final check-in",
+    items:[
+      {id:"call25", title:"Day 25 onboarding + referral call completed", tag:"call", tagLabel:"Call",
+        desc:"Your final 30-day check-in — review your journey and what's next."},
+    ]
+  },
+];
+
+// ═══════════════════════════════════════════
+// STATE — load/save via localStorage
+// ═══════════════════════════════════════════
+const STORAGE_KEY = "af_atc_state_v1";
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"name":"","done":{},"staff":{},"redeemed":false}');
+
+function persist(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+function saveName(){
+  const val = document.getElementById('nameInput').value.trim();
+  if(!val) return;
+  state.name = val;
+  persist();
+  renderHeader();
+}
+
+function toggleItem(id){
+  state.done[id] = !state.done[id];
+  persist();
+  renderAll();
+}
+
+function updateStaffField(key, val){
+  state.staff[key] = val;
+  persist();
+}
+
+// ═══════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════
+let activePhase = 1;
+
+function allItems(){
+  return CHECKLIST.flatMap(g => g.items);
+}
+
+function renderHeader(){
+  const pill = document.getElementById('memberPillName');
+  pill.textContent = state.name ? state.name : "Set up";
+  document.getElementById('setupBanner').style.display = state.name ? 'none' : 'block';
+
+  const items = allItems();
+  const total = items.length;
+  const done = items.filter(i => state.done[i.id]).length;
+  document.getElementById('doneCount').textContent = done;
+  document.getElementById('totalCount').textContent = total;
+
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById('ringPct').textContent = pct + '%';
+  const circumference = 144.5;
+  const offset = circumference - (pct/100)*circumference;
+  document.getElementById('ringFg').style.strokeDashoffset = offset;
+
+  document.getElementById('rewardProgressText').textContent = `${done} of ${total} items completed`;
+  const btn = document.getElementById('rewardBtn');
+  if(done === total && total > 0){
+    btn.disabled = false;
+    btn.textContent = "🎉 Show Staff & Claim Your Tee";
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Complete all items to unlock (${total-done} left)`;
+  }
+}
+
+function renderPhaseTabs(){
+  const wrap = document.getElementById('phaseTabs');
+  const phases = [
+    {n:1,label:"Phase 1"},
+    {n:2,label:"Phase 2"},
+    {n:3,label:"Phase 3"},
+  ];
+  wrap.innerHTML = phases.map(p => `
+    <button class="phase-tab ${p.n===activePhase?'active':''}" onclick="setPhase(${p.n})">${p.label}</button>
+  `).join('');
+}
+
+function setPhase(n){
+  activePhase = n;
+  renderPhaseTabs();
+  renderChecklist();
+}
+
+function renderChecklist(){
+  const wrap = document.getElementById('checklistWrap');
+  const groups = CHECKLIST.filter(g => g.phase === activePhase);
+  let html = '';
+
+  groups.forEach(group => {
+    const doneInGroup = group.items.filter(i => state.done[i.id]).length;
+    html += `<div class="section-head">
+      <div class="section-title">${group.section}</div>
+      <div class="section-meta">${doneInGroup}/${group.items.length}</div>
+    </div>`;
+
+    group.items.forEach(item => {
+      const isDone = !!state.done[item.id];
+      const tagClass = `tag-${item.tag}`;
+      html += `
+      <div class="item-card ${isDone?'done':''}">
+        <div class="item-check" onclick="toggleItem('${item.id}')">${isDone?'✓':''}</div>
+        <div class="item-body">
+          <div class="item-title" onclick="toggleItem('${item.id}')">${item.title}</div>
+          <div class="item-desc">${item.desc}</div>
+          <span class="item-tag ${tagClass}">${item.tagLabel}</span>
+          ${item.expand ? `<div><span class="expand-toggle" onclick="toggleExpand('${item.id}')">More info ▾</span></div>
+          <div class="item-expand" id="exp_${item.id}">${item.expand}</div>` : ''}
+          ${item.staffFields ? `<div class="staff-grid">
+            ${item.staffFields.map(f => `
+              <div class="staff-slot">
+                <div class="staff-slot-label">${f.label}</div>
+                <input class="staff-slot-input" placeholder="Type here" value="${state.staff[f.key]||''}"
+                  oninput="updateStaffField('${f.key}', this.value)">
+              </div>
+            `).join('')}
+          </div>` : ''}
+        </div>
+      </div>`;
+    });
+  });
+
+  wrap.innerHTML = html;
+}
+
+function toggleExpand(id){
+  const el = document.getElementById('exp_'+id);
+  el.classList.toggle('open');
+}
+
+function renderAll(){
+  renderHeader();
+  renderPhaseTabs();
+  renderChecklist();
+}
+
+// ═══════════════════════════════════════════
+// REWARD MODAL
+// ═══════════════════════════════════════════
+function openRewardModal(){
+  const code = "AF-" + (state.name ? state.name.substring(0,3).toUpperCase() : "MBR") + "-" + Math.floor(1000+Math.random()*9000);
+  document.getElementById('redeemCode').textContent = state.redeemCode || code;
+  if(!state.redeemCode){ state.redeemCode = code; persist(); }
+  document.getElementById('rewardModal').classList.add('open');
+}
+function closeRewardModal(){
+  document.getElementById('rewardModal').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════
+// INSTALL MODAL
+// ═══════════════════════════════════════════
+function openInstallModal(){
+  document.getElementById('installModal').classList.add('open');
+}
+function closeInstallModal(){
+  document.getElementById('installModal').classList.remove('open');
+}
+function showPlatform(p){
+  document.getElementById('btnIOS').classList.toggle('active', p==='ios');
+  document.getElementById('btnAndroid').classList.toggle('active', p==='android');
+  document.getElementById('stepsIOS').classList.toggle('active', p==='ios');
+  document.getElementById('stepsAndroid').classList.toggle('active', p==='android');
+}
+
+// Auto-detect platform on load
+(function autoDetect(){
+  const ua = navigator.userAgent || '';
+  if(/Android/i.test(ua)) showPlatform('android');
+  else showPlatform('ios');
+})();
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+if(state.name) document.getElementById('nameInput').value = state.name;
+renderAll();
+</script>
+</body>
+</html>
